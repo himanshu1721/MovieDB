@@ -1,20 +1,68 @@
 import React from "react";
-import { SafeAreaView, Text, TouchableOpacity } from "react-native";
-import { Navigations, Strings } from "../../constants";
+import { View, FlatList, SafeAreaView, ScrollView } from "react-native";
+import MovieCard from "./components/MovieCard";
+import SectionTitle from "./components/SectionTitle";
+import { mostPopular, trendingMovie } from "../../constants/DummyData";
+import { Strings } from "../../constants";
 import styles from "./styles/HomeScreenStyles";
 
-const Home = ({ navigation }) => {
+const movies = mostPopular;
+const trendingMovies = trendingMovie;
+
+const HomeScreen = (): JSX.Element => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>{Strings.homeScreenText}</Text>
-      <TouchableOpacity
-        style={styles.nextScreenButtonStyles}
-        onPress={() => navigation.navigate(Navigations.movieDetail)}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.scrollViewStyle}
       >
-        <Text>{Strings.homeScreenNavigationButtonTitle}</Text>
-      </TouchableOpacity>
+        <View style={styles.movieListContainer}>
+          <View>
+            <View style={styles.sectionTitleBar}>
+              <SectionTitle title={Strings.whatsPopular} />
+            </View>
+            <View style={styles.sectionStyle}>
+              <FlatList
+                bounces={false}
+                horizontal
+                ItemSeparatorComponent={() => {
+                  return <View style={styles.itemSeparator} />;
+                }}
+                showsHorizontalScrollIndicator={false}
+                data={movies}
+                renderItem={({ item }) => {
+                  return <MovieCard item={item} />;
+                }}
+              />
+            </View>
+          </View>
+        </View>
+        <View style={styles.movieListContainer}>
+          <View>
+            <View style={styles.sectionTitleBar}>
+              <SectionTitle title={Strings.trending} />
+            </View>
+            <View style={styles.sectionSeparator} />
+            <View style={styles.sectionStyle}>
+              <FlatList
+                keyExtractor={(item) => `${item.id}`}
+                horizontal
+                bounces={false}
+                ItemSeparatorComponent={() => {
+                  return <View style={styles.itemSeparator} />;
+                }}
+                showsHorizontalScrollIndicator={false}
+                data={trendingMovies}
+                renderItem={({ item }) => {
+                  return <MovieCard item={item} />;
+                }}
+              />
+            </View>
+          </View>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
-export default Home;
+export default HomeScreen;
