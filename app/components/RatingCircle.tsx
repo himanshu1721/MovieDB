@@ -5,6 +5,7 @@ import { returnColor } from "../services";
 import { moderateScale, Colors } from "../themes";
 import { Strings } from "../constants";
 import { styles } from "./styles/RatingCircleStyles";
+
 interface RatingCircleProps {
   vote_average: number;
 }

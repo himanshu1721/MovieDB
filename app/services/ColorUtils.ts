@@ -1,4 +1,5 @@
 import { Colors } from "../themes";
+
 interface ColorProps {
   colour: string;
   shadow: string;

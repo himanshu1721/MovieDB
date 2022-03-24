@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, StyleSheet } from "react-native";
 import { moderateScale, Colors } from "../../../themes";
+
 interface SectionTitleProps {
   title: string;
 }
