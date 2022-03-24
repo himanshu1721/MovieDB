@@ -1,5 +1,7 @@
 import React from "react";
 import { View, FlatList, SafeAreaView, ScrollView } from "react-native";
+import HeaderComponent from "./components/Header";
+import FilterButton from "./components/FilterButton";
 import MovieCard from "./components/MovieCard";
 import SectionTitle from "./components/SectionTitle";
 import { mostPopular, trendingMovie } from "../../constants/DummyData";
@@ -12,6 +14,7 @@ const trendingMovies = trendingMovie;
 const HomeScreen = (): JSX.Element => {
   return (
     <SafeAreaView style={styles.container}>
+      <HeaderComponent />
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={styles.scrollViewStyle}
@@ -20,6 +23,7 @@ const HomeScreen = (): JSX.Element => {
           <View>
             <View style={styles.sectionTitleBar}>
               <SectionTitle title={Strings.whatsPopular} />
+              <FilterButton title={Strings.streaming} />
             </View>
             <View style={styles.sectionStyle}>
               <FlatList
@@ -41,6 +45,7 @@ const HomeScreen = (): JSX.Element => {
           <View>
             <View style={styles.sectionTitleBar}>
               <SectionTitle title={Strings.trending} />
+              <FilterButton title={Strings.today} />
             </View>
             <View style={styles.sectionSeparator} />
             <View style={styles.sectionStyle}>
