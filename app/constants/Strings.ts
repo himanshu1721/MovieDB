@@ -8,6 +8,7 @@ const strings = {
   whatsPopular: "What's Popular",
   today: "Today",
   trending: "Trending",
+  errorMessage: "Sorry Couldn't fetch Data",
 };
 
 export default strings;
