@@ -13,6 +13,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  fetchingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   sectionSeparator: { height: verticalScale(10) },
   itemSeparator: { width: moderateScale(26) },
   container: {
