@@ -11,9 +11,9 @@ import MovieActions, { MovieSelectors } from "../../sauce/redux/MovieRedux";
 import HeaderComponent from "./components/Header";
 import FilterButton from "./components/FilterButton";
 import SectionTitle from "./components/SectionTitle";
+import CustomFlatList from "./components/CustomFlatList";
 import { Strings } from "../../constants";
 import styles from "./styles/HomeScreenStyles";
-import CustomFlatList from "./components/CustomFlatList";
 
 const HomeScreen = (): JSX.Element => {
   const dispatch = useDispatch();
