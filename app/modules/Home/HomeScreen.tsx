@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import {
   View,
   Text,
+  FlatList,
   SafeAreaView,
   ScrollView,
   ActivityIndicator,
@@ -10,8 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import MovieActions, { MovieSelectors } from "../../sauce/redux/MovieRedux";
 import HeaderComponent from "./components/Header";
 import FilterButton from "./components/FilterButton";
+import MovieCard from "./components/MovieCard";
 import SectionTitle from "./components/SectionTitle";
-import CustomFlatList from "./components/CustomFlatList";
 import { Strings } from "../../constants";
 import styles from "./styles/HomeScreenStyles";
 
@@ -51,7 +52,19 @@ const HomeScreen = (): JSX.Element => {
                 <FilterButton title={Strings.streaming} />
               </View>
               <View style={styles.sectionStyle}>
-                <CustomFlatList data={popularMovies} />
+                <FlatList
+                  keyExtractor={(item) => `${item.id}`}
+                  bounces={false}
+                  horizontal
+                  ItemSeparatorComponent={() => {
+                    return <View style={styles.itemSeparator} />;
+                  }}
+                  showsHorizontalScrollIndicator={false}
+                  data={popularMovies}
+                  renderItem={({ item }) => {
+                    return <MovieCard item={item} />;
+                  }}
+                />
               </View>
             </View>
           </View>
@@ -63,7 +76,19 @@ const HomeScreen = (): JSX.Element => {
               </View>
               <View style={styles.sectionSeparator} />
               <View style={styles.sectionStyle}>
-                <CustomFlatList data={trendingMovies} />
+                <FlatList
+                  keyExtractor={(item) => `${item.id}`}
+                  horizontal
+                  bounces={false}
+                  ItemSeparatorComponent={() => {
+                    return <View style={styles.itemSeparator} />;
+                  }}
+                  showsHorizontalScrollIndicator={false}
+                  data={trendingMovies}
+                  renderItem={({ item }) => {
+                    return <MovieCard item={item} />;
+                  }}
+                />
               </View>
             </View>
           </View>
