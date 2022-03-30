@@ -4,6 +4,7 @@ const AppConstants = {
   BASE_URL: "https://api.themoviedb.org/3/",
   POPULAR_MOVIES_ENDPOINT: `movie/popular?api_key=${API_KEY}&language=en-US&page=1`,
   TRENDING_MOVIES_ENDPOINT: `trending/movie/day?api_key=${API_KEY}`,
+  FREE_MOVIES_ENDPOINT: `discover/movie?api_key=${API_KEY}&language=en-US&sort_by=vote_count.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=free`,
 };
 
 export default AppConstants;

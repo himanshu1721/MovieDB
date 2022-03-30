@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { moderateScale, Colors, scale, verticalScale } from "../../../themes";
+import { moderateScale, Colors } from "../../../themes";
 
 const styles = StyleSheet.create({
   imageStyles: {
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     backgroundColor: Colors.prussianBlue,
-    height: verticalScale(60),
+    height: moderateScale(60),
     justifyContent: "center",
   },
 });

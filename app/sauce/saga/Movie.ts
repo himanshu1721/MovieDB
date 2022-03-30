@@ -5,6 +5,15 @@ import API from "../../sauce/services/Api";
 
 const userAPI = API.create();
 
+function* getFreeMovies(api: any) {
+  yield call(
+    callApi,
+    api.getFreeMovies,
+    MovieActions.movieFree,
+    MovieActions.movieFailure
+  );
+}
+
 function* getPopular(api: any) {
   yield call(
     callApi,
@@ -26,4 +35,5 @@ function* getTrending(api: any) {
 export default [
   takeLatest(MovieTypes.MOVIE_REQUEST, getPopular, userAPI),
   takeLatest(MovieTypes.MOVIE_REQUEST, getTrending, userAPI),
+  takeLatest(MovieTypes.MOVIE_REQUEST, getFreeMovies, userAPI),
 ];
