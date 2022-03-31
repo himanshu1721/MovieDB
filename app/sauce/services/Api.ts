@@ -11,10 +11,12 @@ const create = (
 
   const getPopular = () => api.get(endPoint);
   const getTrending = () => api.get(AppConstants.TRENDING_MOVIES_ENDPOINT);
+  const getFreeMovies = () => api.get(AppConstants.FREE_MOVIES_ENDPOINT);
 
   return {
     getPopular,
     getTrending,
+    getFreeMovies,
   };
 };
 

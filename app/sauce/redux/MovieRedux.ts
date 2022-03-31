@@ -5,6 +5,7 @@ import Immutable from "seamless-immutable";
 const { Types, Creators } = createActions({
   movieTrending: ["trending"],
   moviePopular: ["popular"],
+  movieFree: ["free"],
   movieRequest: [],
   movieFailure: ["error"],
 });
@@ -16,6 +17,7 @@ export default Creators;
 export const INITIAL_STATE = Immutable({
   trendingList: null,
   popularList: null,
+  freeMoviesList: null,
   errorMessage: null,
   error: false,
   fetching: false,
@@ -25,6 +27,7 @@ export const INITIAL_STATE = Immutable({
 export const MovieSelectors = {
   getTrending: (state: any) => state.movielist.trendingList,
   getPopular: (state: any) => state.movielist.popularList,
+  getFreeMovies: (state: any) => state.movielist.freeMoviesList,
   getFetch: (state: any) => state.movielist.fetching,
   getError: (state: any) => state.movielist.error,
   getErrorMessage: (state: any) => state.movielist.errorMessage,
@@ -48,6 +51,14 @@ export const onMoviePopular = (state: any, action: any) => {
   });
 };
 
+export const onFreeMovies = (state: any, action: any) => {
+  return state.merge({
+    error: false,
+    fetching: false,
+    freeMoviesList: action.free.results,
+  });
+};
+
 export const onMovieRequest = (state: any) => {
   return state.merge({
     fetching: true,
@@ -67,6 +78,7 @@ export const onMovieFailure = (state: any, action: any) => {
 export const MovieReducer = createReducer(INITIAL_STATE, {
   [Types.MOVIE_TRENDING]: onMovieTrending,
   [Types.MOVIE_POPULAR]: onMoviePopular,
+  [Types.MOVIE_FREE]: onFreeMovies,
   [Types.MOVIE_REQUEST]: onMovieRequest,
   [Types.MOVIE_FAILURE]: onMovieFailure,
 });

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -12,6 +12,7 @@ import HeaderComponent from "./components/Header";
 import FilterButton from "./components/FilterButton";
 import SectionTitle from "./components/SectionTitle";
 import CustomFlatList from "./components/CustomFlatList";
+import FilterButtonOptions from "../../constants/FilterButtonOptions";
 import { Strings } from "../../constants";
 import styles from "./styles/HomeScreenStyles";
 
@@ -19,8 +20,30 @@ const HomeScreen = (): JSX.Element => {
   const dispatch = useDispatch();
   const popularMovies = useSelector(MovieSelectors.getPopular);
   const trendingMovies = useSelector(MovieSelectors.getTrending);
+  const freeMovies = useSelector(MovieSelectors.getFreeMovies);
   const isError = useSelector(MovieSelectors.getError);
   const isLoading = useSelector(MovieSelectors.getFetch);
+
+  const [selectedElementPopular, setSelectedElementPopular] = useState(
+    FilterButtonOptions.popularMoviesFilter[0].name
+  );
+  const [selectedElementTrending, setSelectedElementTrending] = useState(
+    FilterButtonOptions.trendingFilter[0].name
+  );
+  const [selectedElementFreeToWatch, setSelectedElementFreeToWatch] = useState(
+    FilterButtonOptions.freeToWatchFilter[0].name
+  );
+
+  const onSelectPopular = (item: string): void => {
+    setSelectedElementPopular(item);
+  };
+
+  const onSelectTrending = (item: string): void => {
+    setSelectedElementTrending(item);
+  };
+  const onSelectFreeToWatch = (item: string): void => {
+    setSelectedElementFreeToWatch(item);
+  };
 
   useEffect(() => {
     dispatch(MovieActions.movieRequest());
@@ -48,18 +71,43 @@ const HomeScreen = (): JSX.Element => {
             <View>
               <View style={styles.sectionTitleBar}>
                 <SectionTitle title={Strings.whatsPopular} />
-                <FilterButton title={Strings.streaming} />
+                <FilterButton
+                  elements={FilterButtonOptions.popularMoviesFilter}
+                  onSelect={onSelectPopular}
+                  value={selectedElementPopular}
+                />
               </View>
               <View style={styles.sectionStyle}>
                 <CustomFlatList data={popularMovies} />
               </View>
             </View>
           </View>
+
+          <View style={styles.movieListContainer}>
+            <View>
+              <View style={styles.sectionTitleBar}>
+                <SectionTitle title={Strings.freeToWatch} />
+                <FilterButton
+                  elements={FilterButtonOptions.freeToWatchFilter}
+                  onSelect={onSelectFreeToWatch}
+                  value={selectedElementFreeToWatch}
+                />
+              </View>
+              <View style={styles.sectionStyle}>
+                <CustomFlatList data={freeMovies} />
+              </View>
+            </View>
+          </View>
+
           <View style={styles.movieListContainer}>
             <View>
               <View style={styles.sectionTitleBar}>
                 <SectionTitle title={Strings.trending} />
-                <FilterButton title={Strings.today} />
+                <FilterButton
+                  onSelect={onSelectTrending}
+                  value={selectedElementTrending}
+                  elements={FilterButtonOptions.trendingFilter}
+                />
               </View>
               <View style={styles.sectionSeparator} />
               <View style={styles.sectionStyle}>

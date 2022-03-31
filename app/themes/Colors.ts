@@ -14,6 +14,7 @@ const colors = {
   green: "#12D780",
   darkGreen: "#224E2C",
   emerald: "#ACF8CD",
+  riptide: "#83EFC5",
 };
 
 export default colors;
