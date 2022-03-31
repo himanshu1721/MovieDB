@@ -3,7 +3,61 @@ import MovieActions, { MovieTypes } from "../redux/MovieRedux";
 import { callApi } from "../services/Utils";
 import API from "../../sauce/services/Api";
 
-const userAPI = API.create();
+const movieAPI = API.create();
+
+function* getPopularMovies(api: any) {
+  yield call(
+    callApi,
+    api.getPopularStreaming,
+    MovieActions.moviePopular,
+    MovieActions.movieFailure
+  );
+}
+
+function* getPopularTV(api: any) {
+  yield call(
+    callApi,
+    api.getPopularTV,
+    MovieActions.tvPopular,
+    MovieActions.movieFailure
+  );
+}
+
+function* getTheatreMovies(api: any) {
+  yield call(
+    callApi,
+    api.getPopularInTheatres,
+    MovieActions.theatrePopular,
+    MovieActions.movieFailure
+  );
+}
+
+function* getRentMovies(api: any) {
+  yield call(
+    callApi,
+    api.getPopularForRent,
+    MovieActions.rentPopular,
+    MovieActions.movieFailure
+  );
+}
+
+function* getTrendingToday(api: any) {
+  yield call(
+    callApi,
+    api.getTrendingToday,
+    MovieActions.movieTrendingToday,
+    MovieActions.movieFailure
+  );
+}
+
+function* getTrendingWeekly(api: any) {
+  yield call(
+    callApi,
+    api.getTrendingWeekly,
+    MovieActions.movieTrendingWeek,
+    MovieActions.movieFailure
+  );
+}
 
 function* getFreeMovies(api: any) {
   yield call(
@@ -14,26 +68,22 @@ function* getFreeMovies(api: any) {
   );
 }
 
-function* getPopular(api: any) {
+function* getFreeTV(api: any) {
   yield call(
     callApi,
-    api.getPopular,
-    MovieActions.moviePopular,
-    MovieActions.movieFailure
-  );
-}
-
-function* getTrending(api: any) {
-  yield call(
-    callApi,
-    api.getTrending,
-    MovieActions.movieTrending,
+    api.getFreeTV,
+    MovieActions.tvFree,
     MovieActions.movieFailure
   );
 }
 
 export default [
-  takeLatest(MovieTypes.MOVIE_REQUEST, getPopular, userAPI),
-  takeLatest(MovieTypes.MOVIE_REQUEST, getTrending, userAPI),
-  takeLatest(MovieTypes.MOVIE_REQUEST, getFreeMovies, userAPI),
+  takeLatest(MovieTypes.MOVIE_REQUEST, getPopularMovies, movieAPI),
+  takeLatest(MovieTypes.MOVIE_REQUEST, getPopularTV, movieAPI),
+  takeLatest(MovieTypes.MOVIE_REQUEST, getTheatreMovies, movieAPI),
+  takeLatest(MovieTypes.MOVIE_REQUEST, getRentMovies, movieAPI),
+  takeLatest(MovieTypes.MOVIE_REQUEST, getTrendingToday, movieAPI),
+  takeLatest(MovieTypes.MOVIE_REQUEST, getTrendingWeekly, movieAPI),
+  takeLatest(MovieTypes.MOVIE_REQUEST, getFreeMovies, movieAPI),
+  takeLatest(MovieTypes.MOVIE_REQUEST, getFreeTV, movieAPI),
 ];

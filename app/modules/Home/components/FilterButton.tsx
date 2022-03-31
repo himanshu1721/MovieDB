@@ -42,7 +42,7 @@ const FilterButton = ({
               return (
                 <TouchableOpacity
                   onPress={() => {
-                    onSelectedItem(val.name, setOpen, onSelect);
+                    onSelectedItem(val.name);
                   }}
                   activeOpacity={0.6}
                   key={String(i)}
