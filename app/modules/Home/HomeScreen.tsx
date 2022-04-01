@@ -24,6 +24,7 @@ const HomeScreen = (): JSX.Element => {
   const popularRent = useSelector(MovieSelectors.getPopularMovieRent);
   const trendingMoviesDay = useSelector(MovieSelectors.getTrendingDay);
   const freeMovies = useSelector(MovieSelectors.getFreeMovies);
+  const freeTV = useSelector(MovieSelectors.getFreeTV);
   const isError = useSelector(MovieSelectors.getError);
   const isLoading = useSelector(MovieSelectors.getFetch);
 
@@ -53,6 +54,14 @@ const HomeScreen = (): JSX.Element => {
     }
   };
 
+  const setFreeToWatchMediaList = (item: string) => {
+    if (item === FilterButtonOptions.freeToWatchFilter[0].name) {
+      setFree(freeMovies);
+    } else if (item === FilterButtonOptions.freeToWatchFilter[1].name) {
+      setFree(freeTV);
+    }
+  };
+
   const onSelectPopular = (item: string): void => {
     setSelectedElementPopular(item);
     setPopularMediaList(item);
@@ -61,8 +70,10 @@ const HomeScreen = (): JSX.Element => {
   const onSelectTrending = (item: string): void => {
     setSelectedElementTrending(item);
   };
+
   const onSelectFreeToWatch = (item: string): void => {
     setSelectedElementFreeToWatch(item);
+    setFreeToWatchMediaList(item);
   };
 
   useEffect((): void => {
