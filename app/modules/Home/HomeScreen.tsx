@@ -23,6 +23,7 @@ const HomeScreen = (): JSX.Element => {
   const popularTheatre = useSelector(MovieSelectors.getPopularMovieTheatre);
   const popularRent = useSelector(MovieSelectors.getPopularMovieRent);
   const trendingMoviesDay = useSelector(MovieSelectors.getTrendingDay);
+  const trendingMoviesWeek = useSelector(MovieSelectors.getTrendingWeek);
   const freeMovies = useSelector(MovieSelectors.getFreeMovies);
   const freeTV = useSelector(MovieSelectors.getFreeTV);
   const isError = useSelector(MovieSelectors.getError);
@@ -62,6 +63,14 @@ const HomeScreen = (): JSX.Element => {
     }
   };
 
+  const setTrendingMediaList = (item: string) => {
+    if (item === FilterButtonOptions.trendingFilter[0].name) {
+      setTrending(trendingMoviesDay);
+    } else if (item === FilterButtonOptions.trendingFilter[1].name) {
+      setTrending(trendingMoviesWeek);
+    }
+  };
+
   const onSelectPopular = (item: string): void => {
     setSelectedElementPopular(item);
     setPopularMediaList(item);
@@ -69,6 +78,7 @@ const HomeScreen = (): JSX.Element => {
 
   const onSelectTrending = (item: string): void => {
     setSelectedElementTrending(item);
+    setTrendingMediaList(item);
   };
 
   const onSelectFreeToWatch = (item: string): void => {
