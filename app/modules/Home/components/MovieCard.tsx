@@ -17,9 +17,11 @@ const MovieCard = ({ item }): JSX.Element => {
       <RatingCircle vote_average={item?.vote_average} />
       <View style={styles.separatorStyles} />
       <View style={styles.textContainer}>
-        <Text style={styles.titleStyles}>{item?.title}</Text>
+        <Text style={styles.titleStyles}>
+          {item?.title ?? item?.original_name}
+        </Text>
         <Text style={styles.releaseDateStyles}>
-          {refactorDate(item?.release_date)}
+          {refactorDate(item?.release_date ?? item?.first_air_date)}
         </Text>
       </View>
     </View>
