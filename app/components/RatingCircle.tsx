@@ -8,11 +8,19 @@ import { styles } from "./styles/RatingCircleStyles";
 
 interface RatingCircleProps {
   vote_average: number;
+  isMovieDetail?: boolean;
 }
 
-const RatingCircle = ({ vote_average }: RatingCircleProps): JSX.Element => {
+const RatingCircle = ({
+  vote_average,
+  isMovieDetail,
+}: RatingCircleProps): JSX.Element => {
   return (
-    <View style={styles.container}>
+    <View
+      style={
+        isMovieDetail ? styles.containerMovieDetailScreen : styles.container
+      }
+    >
       <ProgressCircle
         percent={vote_average * 10}
         radius={moderateScale(25)}
