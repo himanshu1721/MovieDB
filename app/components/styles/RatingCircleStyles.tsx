@@ -25,4 +25,13 @@ export const styles = StyleSheet.create({
     borderRadius: moderateScale(27),
     backgroundColor: Colors.black,
   },
+
+  containerMovieDetailScreen: {
+    width: moderateScale(54),
+    justifyContent: "center",
+    alignItems: "center",
+    height: moderateScale(54),
+    borderRadius: moderateScale(27),
+    backgroundColor: Colors.black,
+  },
 });

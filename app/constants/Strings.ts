@@ -13,6 +13,11 @@ const strings = {
   onTV: "On TV",
   inTheatres: "In Theatres",
   forRent: "For Rent",
+  userScore: "User Score",
+  playTrailer: "Play Trailer",
+  nr: "NR",
+  us: "US",
+  overview: "OverView",
 };
 
 export default strings;
