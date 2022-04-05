@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import MovieActions, { MovieSelectors } from "../../sauce/redux/MovieRedux";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import HeaderComponent from "./components/Header";
 import FilterButton from "./components/FilterButton";
 import SectionTitle from "./components/SectionTitle";
@@ -16,7 +17,11 @@ import FilterButtonOptions from "../../constants/FilterButtonOptions";
 import { Strings } from "../../constants";
 import styles from "./styles/HomeScreenStyles";
 
-const HomeScreen = (): JSX.Element => {
+interface HomeScreenProps {
+  navigation: NativeStackNavigationProp<any, any>;
+}
+
+const HomeScreen = ({ navigation }: HomeScreenProps): JSX.Element => {
   const dispatch = useDispatch();
   const popularMovies = useSelector(MovieSelectors.getPopularMovie);
   const popularTV = useSelector(MovieSelectors.getPopularTV);
@@ -118,7 +123,7 @@ const HomeScreen = (): JSX.Element => {
               />
             </View>
             <View style={styles.sectionStyle}>
-              <CustomFlatList data={popular} />
+              <CustomFlatList navigation={navigation} data={popular} />
             </View>
           </View>
 
@@ -132,7 +137,7 @@ const HomeScreen = (): JSX.Element => {
               />
             </View>
             <View style={styles.sectionStyle}>
-              <CustomFlatList data={free} />
+              <CustomFlatList navigation={navigation} data={free} />
             </View>
           </View>
 
@@ -146,7 +151,7 @@ const HomeScreen = (): JSX.Element => {
               />
             </View>
             <View style={styles.sectionStyle}>
-              <CustomFlatList data={trending} />
+              <CustomFlatList navigation={navigation} data={trending} />
             </View>
           </View>
         </ScrollView>

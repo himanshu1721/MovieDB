@@ -20,6 +20,7 @@ const strings = {
   overview: "Overview",
   commaWithLeadingSpace: ", ",
   space: " ",
+  errorMessageDetailScreen: "Could not fetch data, please try again",
 };
 
 export default strings;

@@ -1,9 +1,10 @@
 import React from "react";
 import { View, FlatList } from "react-native";
 import MovieCard from "./MovieCard";
+import { Navigations } from "../../../constants";
 import styles from "../styles/CustomFlatListStyles";
 
-const CustomFlatList = ({ data }) => {
+const CustomFlatList = ({ data, navigation }) => {
   return (
     <FlatList
       keyExtractor={(item) => `${item.id}`}
@@ -15,7 +16,16 @@ const CustomFlatList = ({ data }) => {
       showsHorizontalScrollIndicator={false}
       data={data}
       renderItem={({ item }) => {
-        return <MovieCard item={item} />;
+        return (
+          <MovieCard
+            onTap={() =>
+              navigation?.navigate(Navigations.movieDetail, {
+                movieID: item?.id,
+              })
+            }
+            item={item}
+          />
+        );
       }}
     />
   );
