@@ -15,6 +15,7 @@ const colors = {
   darkGreen: "#224E2C",
   emerald: "#ACF8CD",
   riptide: "#83EFC5",
+  starDust: "#A2A2A1",
 };
 
 export default colors;

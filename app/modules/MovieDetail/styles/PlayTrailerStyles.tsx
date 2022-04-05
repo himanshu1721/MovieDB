@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native";
-import { Colors } from "../../../themes";
+import { Colors, moderateScale, scale, verticalScale } from "../../../themes";
 
 const styles = StyleSheet.create({
-  iconStyles: { width: 20, height: 20 },
+  iconStyles: { width: scale(20), height: verticalScale(20) },
   playTrailerTextStyles: {
     color: Colors.white,
-    fontSize: 20,
+    fontSize: moderateScale(20),
     fontWeight: "500",
   },
   container: {

@@ -17,7 +17,9 @@ const strings = {
   playTrailer: "Play Trailer",
   nr: "NR",
   us: "US",
-  overview: "OverView",
+  overview: "Overview",
+  commaWithLeadingSpace: ", ",
+  space: " ",
 };
 
 export default strings;
