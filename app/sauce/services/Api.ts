@@ -21,6 +21,10 @@ const create = (
     api.get(AppConstants.TRENDING_MOVIES_WEEK_ENDPOINT);
   const getFreeMovies = () => api.get(AppConstants.FREE_MOVIES_ENDPOINT);
   const getFreeTV = () => api.get(AppConstants.FREE_TV_ENDPOINT);
+  const getMovie = (movieId: number) =>
+    api.get(
+      `${AppConstants.MOVIE}${movieId}${AppConstants.MOVIE_TRAILING_ENDPOINT}`
+    );
 
   return {
     getPopularStreaming,
@@ -31,6 +35,7 @@ const create = (
     getTrendingWeekly,
     getFreeMovies,
     getFreeTV,
+    getMovie,
   };
 };
 

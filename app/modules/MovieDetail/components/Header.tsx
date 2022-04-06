@@ -1,15 +1,23 @@
 import React from "react";
-import { View, Image } from "react-native";
+import { View, Image, TouchableOpacity } from "react-native";
 import Images from "../../../assets/images";
 import styles from "../styles/HeaderStyles";
 
-const CustomHeader = (): JSX.Element => {
+interface CustomHeaderProps {
+  onTap: () => void;
+}
+
+const CustomHeader = ({ onTap }: CustomHeaderProps): JSX.Element => {
   return (
     <View style={styles.container}>
       <View style={styles.subContainer}>
-        <View style={styles.backIconContainer}>
+        <TouchableOpacity
+          onPress={onTap}
+          activeOpacity={0.9}
+          style={styles.backIconContainer}
+        >
           <Image source={Images.back} style={styles.backIconStyles} />
-        </View>
+        </TouchableOpacity>
         <View style={styles.titleContainer}>
           <Image style={styles.imageStyles} source={Images.appLogo} />
         </View>

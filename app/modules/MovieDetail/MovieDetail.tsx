@@ -1,19 +1,81 @@
-import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import React, { useEffect } from "react";
+import {
+  View,
+  ScrollView,
+  Text,
+  SafeAreaView,
+  ActivityIndicator,
+} from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import MovieActions, { MovieSelectors } from "../../sauce/redux/MovieRedux";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { RouteProp } from "@react-navigation/native";
+import HeaderComponent from "./components/Header";
+import ReleaseDateAndRuntime from "./components/ReleaseDate";
+import Overview from "./components/Overview";
+import GenreList from "./components/GenreList";
+import UserScore from "./components/UserScore";
+import PlayTrailer from "./components/PlayTrailer";
+import ImageComponent from "./components/ImageComponent";
+import MovieTitle from "./components/MovieTitle";
+import { Colors } from "../../themes";
 import { Strings } from "../../constants";
 import styles from "./styles/MovieDetailStyles";
 
-const MovieDetail = ({ navigation }) => {
+interface MovieDetailProps {
+  navigation: NativeStackNavigationProp<any, any>;
+  route: RouteProp<any, any>;
+}
+
+const MovieDetail = ({ navigation, route }: MovieDetailProps) => {
+  const dispatch = useDispatch();
+  const movies = useSelector(MovieSelectors.getMovie);
+  const isLoading = useSelector(MovieSelectors.getFetchDetailScreen);
+  const error = useSelector(MovieSelectors.getErrorDetailScreen);
+
+  useEffect(() => {
+    dispatch(MovieActions.movieSingleRequest(route?.params?.movieID));
+  }, [dispatch, route?.params?.movieID]);
+
   return (
-    <View style={styles.container}>
-      <Text>{Strings.movieDetailScreenText}</Text>
-      <TouchableOpacity
-        style={styles.nextScreenButtonStyles}
-        onPress={() => navigation.goBack()}
-      >
-        <Text>{Strings.movieDetailNavigationButtonTitle}</Text>
-      </TouchableOpacity>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <HeaderComponent onTap={() => navigation.pop()} />
+      {isLoading && (
+        <View style={styles.subContainer}>
+          <ActivityIndicator color={Colors.white} />
+        </View>
+      )}
+      {error && (
+        <View style={styles.subContainer}>
+          <Text>{Strings.errorMessageDetailScreen}</Text>
+        </View>
+      )}
+      {!isLoading && !error && (
+        <ScrollView bounces={false}>
+          <ImageComponent
+            poster={movies?.poster_path}
+            backdrop={movies?.backdrop_path}
+          />
+          <View>
+            <MovieTitle title={movies?.title} />
+            <View style={styles.itemSeparator} />
+            <View style={styles.userScoreAndPlayContainer}>
+              <UserScore vote_average={movies?.vote_average} />
+              <View style={styles.componentSeparator} />
+              <PlayTrailer />
+            </View>
+            <View style={styles.itemSeparator} />
+            <ReleaseDateAndRuntime
+              runTime={movies?.runtime}
+              releaseDate={movies?.release_date}
+            />
+            <GenreList genres={movies?.genres} />
+            <View style={styles.itemSeparator} />
+            <Overview description={movies?.overview} />
+          </View>
+        </ScrollView>
+      )}
+    </SafeAreaView>
   );
 };
 

@@ -1,13 +1,22 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import RatingCircle from "../../../components/RatingCircle";
 import { refactorDate } from "../../../services";
 import { AppConstants } from "../../../constants";
 import styles from "../styles/MovieCardStyles";
 
-const MovieCard = ({ item }): JSX.Element => {
+interface MovieCardProps {
+  item: any;
+  onTap: () => {};
+}
+
+const MovieCard = ({ item, onTap }: MovieCardProps): JSX.Element => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      onPress={onTap}
+      activeOpacity={0.9}
+      style={styles.container}
+    >
       <Image
         style={styles.imageStyles}
         source={{
@@ -24,7 +33,7 @@ const MovieCard = ({ item }): JSX.Element => {
           {refactorDate(item?.release_date ?? item?.first_air_date)}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

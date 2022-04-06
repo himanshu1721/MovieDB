@@ -1,17 +1,26 @@
 import { StyleSheet } from "react-native";
-import { Colors } from "../../../themes";
+import { Colors, verticalScale, moderateScale } from "../../../themes";
 
 const styles = StyleSheet.create({
-  nextScreenButtonStyles: {
-    padding: 10,
-    borderRadius: 5,
-    backgroundColor: Colors.pink,
+  subContainer: { flex: 1, justifyContent: "center" },
+  itemSeparator: {
+    height: verticalScale(9),
+  },
+  userScoreAndPlayContainer: {
+    flex: 1,
+    paddingHorizontal: moderateScale(20),
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  componentSeparator: {
+    width: moderateScale(1.3),
+    opacity: 0.47,
+    height: verticalScale(25),
+    backgroundColor: Colors.white,
   },
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.black,
   },
 });
 

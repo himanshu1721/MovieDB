@@ -1,6 +1,6 @@
 import { takeLatest, call } from "redux-saga/effects";
 import MovieActions, { MovieTypes } from "../redux/MovieRedux";
-import { callApi } from "../services/Utils";
+import { callApi, callApiMovieDetail } from "../services/Utils";
 import API from "../../sauce/services/Api";
 
 const movieAPI = API.create();
@@ -77,6 +77,16 @@ function* getFreeTV(api: any) {
   );
 }
 
+function* getSingleMovie(api: any, action: any) {
+  yield call(
+    callApiMovieDetail,
+    api.getMovie,
+    action.id,
+    MovieActions.movieDetail,
+    MovieActions.movieDetailScreenFailure
+  );
+}
+
 export default [
   takeLatest(MovieTypes.MOVIE_REQUEST, getPopularMovies, movieAPI),
   takeLatest(MovieTypes.MOVIE_REQUEST, getPopularTV, movieAPI),
@@ -86,4 +96,5 @@ export default [
   takeLatest(MovieTypes.MOVIE_REQUEST, getTrendingWeekly, movieAPI),
   takeLatest(MovieTypes.MOVIE_REQUEST, getFreeMovies, movieAPI),
   takeLatest(MovieTypes.MOVIE_REQUEST, getFreeTV, movieAPI),
+  takeLatest(MovieTypes.MOVIE_SINGLE_REQUEST, getSingleMovie, movieAPI),
 ];
