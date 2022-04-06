@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     marginVertical: verticalScale(2),
   },
-  containerBetweenTextAndIcon: { width: 5 },
+  containerBetweenTextAndIcon: { width: moderateScale(5) },
   arrowStyles: {
     width: moderateScale(17),
     height: moderateScale(19),

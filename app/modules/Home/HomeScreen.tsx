@@ -13,6 +13,8 @@ import HeaderComponent from "./components/Header";
 import FilterButton from "./components/FilterButton";
 import SectionTitle from "./components/SectionTitle";
 import CustomFlatList from "./components/CustomFlatList";
+import LatestTrailerBackgroundImage from "./components/LatestTrailerBGImage";
+import LatestTrailerFlatList from "./components/LatestTrailerFlatList";
 import FilterButtonOptions from "../../constants/FilterButtonOptions";
 import { Strings } from "../../constants";
 import styles from "./styles/HomeScreenStyles";
@@ -113,6 +115,17 @@ const HomeScreen = ({ navigation }: HomeScreenProps): JSX.Element => {
           showsVerticalScrollIndicator={false}
           style={styles.scrollViewStyle}
         >
+          <View style={styles.movieListContainer}>
+            <LatestTrailerBackgroundImage
+              imagePath={popular[0].backdrop_path}
+            />
+            <View style={styles.sectionTitleBar}>
+              <SectionTitle title={Strings.latestTrailers} />
+            </View>
+            <View style={styles.sectionAndTrailerListSeparator} />
+            <LatestTrailerFlatList data={popular} />
+          </View>
+
           <View style={styles.movieListContainer}>
             <View style={styles.sectionTitleBar}>
               <SectionTitle title={Strings.whatsPopular} />

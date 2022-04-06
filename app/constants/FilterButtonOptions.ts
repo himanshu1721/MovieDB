@@ -15,4 +15,16 @@ const freeToWatchFilter = [
   { id: 1, name: "TV" },
 ];
 
-export default { popularMoviesFilter, trendingFilter, freeToWatchFilter };
+const latestTrailerFilters = [
+  { id: 0, name: "Streaming" },
+  { id: 1, name: "On TV" },
+  { id: 2, name: "For Rent" },
+  { id: 3, name: "In Theatres" },
+];
+
+export default {
+  popularMoviesFilter,
+  trendingFilter,
+  freeToWatchFilter,
+  latestTrailerFilters,
+};

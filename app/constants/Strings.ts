@@ -15,6 +15,7 @@ const strings = {
   forRent: "For Rent",
   userScore: "User Score",
   playTrailer: "Play Trailer",
+  latestTrailers: "Latest Trailers",
   nr: "NR",
   us: "US",
   overview: "Overview",
