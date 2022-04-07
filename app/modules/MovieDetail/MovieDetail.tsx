@@ -34,8 +34,12 @@ const MovieDetail = ({ navigation, route }: MovieDetailProps) => {
   const error = useSelector(MovieSelectors.getErrorDetailScreen);
 
   useEffect(() => {
-    dispatch(MovieActions.movieSingleRequest(route?.params?.movieID));
-  }, [dispatch, route?.params?.movieID]);
+    if (route?.params?.movieID) {
+      dispatch(MovieActions.movieSingleRequest(route?.params?.movieID));
+    } else if (route?.params?.tvID) {
+      dispatch(MovieActions.tvSingleRequest(route?.params?.tvID));
+    }
+  }, [dispatch, route?.params?.movieID, route?.params?.tvID]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -57,7 +61,10 @@ const MovieDetail = ({ navigation, route }: MovieDetailProps) => {
             backdrop={movies?.backdrop_path}
           />
           <View>
-            <MovieTitle title={movies?.title} />
+            <MovieTitle
+              releaseYear={movies?.release_date ?? movies?.first_air_date}
+              title={movies?.title ?? movies?.original_name}
+            />
             <View style={styles.itemSeparator} />
             <View style={styles.userScoreAndPlayContainer}>
               <UserScore vote_average={movies?.vote_average} />
@@ -66,8 +73,8 @@ const MovieDetail = ({ navigation, route }: MovieDetailProps) => {
             </View>
             <View style={styles.itemSeparator} />
             <ReleaseDateAndRuntime
-              runTime={movies?.runtime}
-              releaseDate={movies?.release_date}
+              runTime={movies?.runtime ?? null}
+              releaseDate={movies?.release_date ?? movies?.first_air_date}
             />
             <GenreList genres={movies?.genres} />
             <View style={styles.itemSeparator} />

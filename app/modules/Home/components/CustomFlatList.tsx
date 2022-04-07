@@ -1,10 +1,16 @@
 import React from "react";
 import { View, FlatList } from "react-native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import MovieCard from "./MovieCard";
 import { Navigations } from "../../../constants";
 import styles from "../styles/CustomFlatListStyles";
 
-const CustomFlatList = ({ data, navigation }) => {
+interface CustomFlatListProps {
+  data: any;
+  navigation: NativeStackNavigationProp<any, any>;
+}
+
+const CustomFlatList = ({ data, navigation }: CustomFlatListProps) => {
   return (
     <FlatList
       keyExtractor={(item) => `${item.id}`}
@@ -18,11 +24,19 @@ const CustomFlatList = ({ data, navigation }) => {
       renderItem={({ item }) => {
         return (
           <MovieCard
-            onTap={() =>
-              navigation?.navigate(Navigations.movieDetail, {
-                movieID: item?.id,
-              })
-            }
+            onTap={() => {
+              const params = item?.original_title
+                ? {
+                    movieID: item?.id,
+                    tvID: null,
+                  }
+                : {
+                    movieID: null,
+                    tvID: item?.id,
+                  };
+
+              navigation?.navigate(Navigations.movieDetail, params);
+            }}
             item={item}
           />
         );

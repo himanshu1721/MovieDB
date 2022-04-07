@@ -3,6 +3,10 @@ import { RootStateOrAny } from "react-redux";
 import Immutable, { ImmutableObject } from "seamless-immutable";
 
 interface MovieProps {
+  latestTrailerMovieList: any;
+  latestTrailerTVList: any;
+  latestTrailerForRent: any;
+  latestTrailerInTheatres: any;
   popularMovieList: any;
   popularTVList: any;
   popularTheatreList: any;
@@ -22,6 +26,10 @@ interface MovieProps {
 
 /* ------------- Types and Action Creators ------------- */
 const { Types, Creators } = createActions({
+  latestTrailerStreaming: ["latest"],
+  latestTrailerTV: ["latest"],
+  latestTrailerRent: ["latest"],
+  latestTrailerTheatres: ["latest"],
   moviePopular: ["popular"],
   tvPopular: ["popular"],
   theatrePopular: ["popular"],
@@ -32,6 +40,8 @@ const { Types, Creators } = createActions({
   tvFree: ["free"],
   movieDetail: ["id"],
   movieSingleRequest: ["id"],
+  tvDetail: ["id"],
+  tvSingleRequest: ["id"],
   movieRequest: [],
   movieFailure: ["error"],
   movieDetailScreenFailure: ["error"],
@@ -42,6 +52,10 @@ export default Creators;
 
 /* ------------- Initial State ------------- */
 export const INITIAL_STATE: ImmutableObject<MovieProps> = Immutable({
+  latestTrailerMovieList: null,
+  latestTrailerTVList: null,
+  latestTrailerForRent: null,
+  latestTrailerInTheatres: null,
   popularMovieList: null,
   popularTVList: null,
   popularTheatreList: null,
@@ -54,6 +68,7 @@ export const INITIAL_STATE: ImmutableObject<MovieProps> = Immutable({
   error: false,
   errorMessage: "",
   movie: null,
+  tv: null,
   errorMessageDetailScreen: "",
   errorDetailScreen: false,
   fetchingDetailScreen: false,
@@ -61,6 +76,14 @@ export const INITIAL_STATE: ImmutableObject<MovieProps> = Immutable({
 
 /* ------------- Selectors ------------- */
 export const MovieSelectors = {
+  getLatestTrailerMovie: (state: RootStateOrAny) =>
+    state.movielist.latestTrailerMovieList,
+  getLatestTVShow: (state: RootStateOrAny) =>
+    state.movielist.latestTrailerTVList,
+  getLatestForRent: (state: RootStateOrAny) =>
+    state.movielist.latestTrailerForRent,
+  getLatestInTheatres: (state: RootStateOrAny) =>
+    state.movielist.latestTrailerInTheatres,
   getPopularMovie: (state: RootStateOrAny) => state.movielist.popularMovieList,
   getPopularTV: (state: RootStateOrAny) => state.movielist.popularTVList,
   getPopularMovieTheatre: (state: RootStateOrAny) =>
@@ -75,6 +98,7 @@ export const MovieSelectors = {
   getError: (state: RootStateOrAny) => state.movielist.error,
   getErrorMessage: (state: RootStateOrAny) => state.movielist.errorMessage,
   getMovie: (state: RootStateOrAny) => state.movielist.movie,
+  getTV: (state: RootStateOrAny) => state.movielist.tv,
   getFetchDetailScreen: (state: RootStateOrAny) =>
     state.movielist.fetchingDetailScreen,
   getErrorDetailScreen: (state: RootStateOrAny) =>
@@ -114,6 +138,34 @@ export const onRentPopular = (state: any, action: any) => {
     error: false,
     fetching: false,
     popularRentList: action.popular.results,
+  });
+};
+export const onLatestMovie = (state: any, action: any) => {
+  return state.merge({
+    error: false,
+    fetching: false,
+    latestTrailerMovieList: action.latest.results,
+  });
+};
+export const onLatestTV = (state: any, action: any) => {
+  return state.merge({
+    error: false,
+    fetching: false,
+    latestTrailerTVList: action.latest.results,
+  });
+};
+export const onLatestRent = (state: any, action: any) => {
+  return state.merge({
+    error: false,
+    fetching: false,
+    latestTrailerForRent: action.latest.results,
+  });
+};
+export const onLatestTheatre = (state: any, action: any) => {
+  return state.merge({
+    error: false,
+    fetching: false,
+    latestTrailerInTheatres: action.latest.results,
   });
 };
 
@@ -184,11 +236,31 @@ export const onMovieDetailFailure = (state: any) => {
   });
 };
 
+export const onTVDetail = (state: any, action: any) => {
+  return state.merge({
+    errorDetailScreen: false,
+    fetchingDetailScreen: false,
+    tv: action.id,
+  });
+};
+
+export const onTVSingleRequest = (state: any) => {
+  return state.merge({
+    fetchingDetailScreen: true,
+  });
+};
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const MovieReducer = createReducer(INITIAL_STATE, {
+  [Types.LATEST_TRAILER_STREAMING]: onLatestMovie,
+  [Types.LATEST_TRAILER_TV]: onLatestTV,
+  [Types.LATEST_TRAILER_RENT]: onLatestRent,
+  [Types.LATEST_TRAILER_THEATRES]: onLatestTheatre,
   [Types.MOVIE_DETAIL]: onMovieDetail,
   [Types.MOVIE_SINGLE_REQUEST]: onMovieDetailRequest,
+  [Types.TV_DETAIL]: onTVDetail,
+  [Types.TV_SINGLE_REQUEST]: onTVSingleRequest,
   [Types.MOVIE_POPULAR]: onMoviePopular,
   [Types.TV_POPULAR]: onTVPopular,
   [Types.THEATRE_POPULAR]: onTheatrePopular,

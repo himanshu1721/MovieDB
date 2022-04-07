@@ -25,6 +25,10 @@ interface HomeScreenProps {
 
 const HomeScreen = ({ navigation }: HomeScreenProps): JSX.Element => {
   const dispatch = useDispatch();
+  const latestTrailerMovie = useSelector(MovieSelectors.getLatestTrailerMovie);
+  const latestTrailerTV = useSelector(MovieSelectors.getLatestTVShow);
+  const latestTrailerRent = useSelector(MovieSelectors.getLatestForRent);
+  const latestTrailerTheatre = useSelector(MovieSelectors.getLatestInTheatres);
   const popularMovies = useSelector(MovieSelectors.getPopularMovie);
   const popularTV = useSelector(MovieSelectors.getPopularTV);
   const popularTheatre = useSelector(MovieSelectors.getPopularMovieTheatre);
@@ -39,16 +43,35 @@ const HomeScreen = ({ navigation }: HomeScreenProps): JSX.Element => {
   const [popular, setPopular] = useState(popularMovies);
   const [trending, setTrending] = useState(trendingMoviesDay);
   const [free, setFree] = useState(freeMovies);
+  const [latest, setLatest] = useState(latestTrailerMovie);
+
+  const [selectedElementLatest, setSelectedElementLatest] = useState(
+    FilterButtonOptions.latestTrailerFilters[0].name
+  );
 
   const [selectedElementPopular, setSelectedElementPopular] = useState(
     FilterButtonOptions.popularMoviesFilter[0].name
   );
+
   const [selectedElementTrending, setSelectedElementTrending] = useState(
     FilterButtonOptions.trendingFilter[0].name
   );
+
   const [selectedElementFreeToWatch, setSelectedElementFreeToWatch] = useState(
     FilterButtonOptions.freeToWatchFilter[0].name
   );
+
+  const setLatestTrailerMediaList = (item: string) => {
+    if (item === FilterButtonOptions.latestTrailerFilters[0].name) {
+      setLatest(latestTrailerMovie);
+    } else if (item === FilterButtonOptions.latestTrailerFilters[1].name) {
+      setLatest(latestTrailerTV);
+    } else if (item === FilterButtonOptions.latestTrailerFilters[2].name) {
+      setLatest(latestTrailerRent);
+    } else if (item === FilterButtonOptions.latestTrailerFilters[3].name) {
+      setLatest(latestTrailerTheatre);
+    }
+  };
 
   const setPopularMediaList = (item: string) => {
     if (item === FilterButtonOptions.popularMoviesFilter[0].name) {
@@ -76,6 +99,11 @@ const HomeScreen = ({ navigation }: HomeScreenProps): JSX.Element => {
     } else if (item === FilterButtonOptions.trendingFilter[1].name) {
       setTrending(trendingMoviesWeek);
     }
+  };
+
+  const onSelectLatest = (item: string): void => {
+    setSelectedElementLatest(item);
+    setLatestTrailerMediaList(item);
   };
 
   const onSelectPopular = (item: string): void => {
@@ -116,15 +144,19 @@ const HomeScreen = ({ navigation }: HomeScreenProps): JSX.Element => {
           style={styles.scrollViewStyle}
         >
           <View style={styles.movieListContainer}>
-            <LatestTrailerBackgroundImage
-              imagePath={popular[0].backdrop_path}
-            />
+            <LatestTrailerBackgroundImage imagePath={latest[0].backdrop_path} />
             <View style={styles.sectionTitleBar}>
-              <SectionTitle title={Strings.latestTrailers} />
+              <SectionTitle isTrailer title={Strings.latestTrailers} />
+              <FilterButton
+                elements={FilterButtonOptions.latestTrailerFilters}
+                onSelect={onSelectLatest}
+                value={selectedElementLatest}
+              />
             </View>
             <View style={styles.sectionAndTrailerListSeparator} />
-            <LatestTrailerFlatList data={popular} />
+            <LatestTrailerFlatList data={latest} />
           </View>
+          <View style={styles.trailerAndPopularSeparator} />
 
           <View style={styles.movieListContainer}>
             <View style={styles.sectionTitleBar}>
@@ -135,6 +167,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps): JSX.Element => {
                 value={selectedElementPopular}
               />
             </View>
+            <View style={styles.sectionAndTrailerListSeparator} />
             <View style={styles.sectionStyle}>
               <CustomFlatList navigation={navigation} data={popular} />
             </View>
@@ -149,6 +182,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps): JSX.Element => {
                 value={selectedElementFreeToWatch}
               />
             </View>
+            <View style={styles.sectionAndTrailerListSeparator} />
             <View style={styles.sectionStyle}>
               <CustomFlatList navigation={navigation} data={free} />
             </View>
@@ -163,6 +197,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps): JSX.Element => {
                 elements={FilterButtonOptions.trendingFilter}
               />
             </View>
+            <View style={styles.sectionAndTrailerListSeparator} />
             <View style={styles.sectionStyle}>
               <CustomFlatList navigation={navigation} data={trending} />
             </View>

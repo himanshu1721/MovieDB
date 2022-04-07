@@ -2,9 +2,11 @@ import { StyleSheet } from "react-native";
 import { Colors, verticalScale, moderateScale } from "../../../themes";
 
 const styles = StyleSheet.create({
-  movieListContainer: { flex: 1, padding: 15 },
+  trailerAndPopularSeparator: { height: verticalScale(30) },
+  movieListContainer: { flex: 1, padding: moderateScale(15) },
   sectionAndTrailerListSeparator: { height: verticalScale(10) },
   sectionTitleBar: {
+    zIndex: 1,
     flexDirection: "row",
     alignItems: "center",
   },

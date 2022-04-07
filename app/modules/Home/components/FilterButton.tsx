@@ -27,14 +27,15 @@ const FilterButton = ({
   };
 
   return (
-    <View>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <View style={styles.subContainer}>
         <Text style={styles.titleStyle}>{value}</Text>
         <View style={styles.containerBetweenTextAndIcon} />
         <TouchableOpacity onPress={() => setOpen(!open)}>
           <Image style={styles.arrowStyles} source={Images.expandArrow} />
         </TouchableOpacity>
       </View>
+      {open && <View style={styles.containerBehind} />}
       {open && (
         <View style={styles.dropdown}>
           {elements.map((val: Value, i: number) => {
