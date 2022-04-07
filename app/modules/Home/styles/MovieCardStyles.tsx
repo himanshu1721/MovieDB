@@ -9,9 +9,9 @@ const styles = StyleSheet.create({
   imageStyles: {
     width: moderateScale(145),
     height: moderateScale(217),
-    borderRadius: 6,
+    borderRadius: moderateScale(6),
   },
-  textContainer: { padding: 5 },
+  textContainer: { padding: moderateScale(5) },
   separatorStyles: { height: moderateScale(30) },
   releaseDateStyles: {
     color: Colors.gray,

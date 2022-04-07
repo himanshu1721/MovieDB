@@ -3,6 +3,7 @@ import { Colors, verticalScale, moderateScale } from "../../../themes";
 
 const styles = StyleSheet.create({
   movieListContainer: { flex: 1, padding: 15 },
+  sectionAndTrailerListSeparator: { height: verticalScale(10) },
   sectionTitleBar: {
     flexDirection: "row",
     alignItems: "center",

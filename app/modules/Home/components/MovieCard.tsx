@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import RatingCircle from "../../../components/RatingCircle";
+import MenuCircle from "./MenuButtonCircle";
 import { refactorDate } from "../../../services";
 import { AppConstants } from "../../../constants";
 import styles from "../styles/MovieCardStyles";
@@ -23,6 +24,7 @@ const MovieCard = ({ item, onTap }: MovieCardProps): JSX.Element => {
           uri: AppConstants.API_IMAGE + item?.poster_path,
         }}
       />
+      <MenuCircle />
       <RatingCircle vote_average={item?.vote_average} />
       <View style={styles.separatorStyles} />
       <View style={styles.textContainer}>
