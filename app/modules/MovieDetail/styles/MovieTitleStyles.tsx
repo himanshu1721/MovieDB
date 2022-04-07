@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { Colors, moderateScale } from "../../../themes";
+import { Colors, moderateScale, scale } from "../../../themes";
 
 const styles = StyleSheet.create({
   container: {
@@ -10,9 +10,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  titleAndYearSeparator: { width: scale(5) },
+  titleYearStyle: {
+    color: Colors.gray,
+    fontSize: moderateScale(19),
+    fontWeight: "500",
+  },
   titleTextStyle: {
     color: Colors.white,
-    fontSize: moderateScale(20),
+    fontSize: moderateScale(23),
     fontWeight: "600",
   },
 });

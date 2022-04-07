@@ -8,7 +8,7 @@ import styles from "../styles/MovieCardStyles";
 
 interface MovieCardProps {
   item: any;
-  onTap: () => {};
+  onTap: () => void;
 }
 
 const MovieCard = ({ item, onTap }: MovieCardProps): JSX.Element => {

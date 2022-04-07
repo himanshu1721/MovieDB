@@ -1,22 +1,18 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
-import { moderateScale, Colors } from "../../../themes";
+import { Text } from "react-native";
+import styles from "../styles/SectionTitleStyles";
 
 interface SectionTitleProps {
+  isTrailer?: boolean;
   title: string;
 }
 
-const SectionTitle = ({ title }: SectionTitleProps) => {
-  return <Text style={styles.titleStyle}>{title}</Text>;
+const SectionTitle = ({ isTrailer, title }: SectionTitleProps) => {
+  return (
+    <Text style={isTrailer ? styles.titleStyleTrailer : styles.titleStyle}>
+      {title}
+    </Text>
+  );
 };
-
-const styles = StyleSheet.create({
-  titleStyle: {
-    flex: 3,
-    fontSize: moderateScale(22),
-    fontWeight: "600",
-    color: Colors.black,
-  },
-});
 
 export default SectionTitle;

@@ -9,6 +9,13 @@ const create = (
     baseURL,
   });
 
+  const getLatestTrailerStreaming = () =>
+    api.get(AppConstants.LATEST_TRAILER_STREAMING);
+  const getLatestTrailerTV = () => api.get(AppConstants.LATEST_TRAILER_TV);
+  const getLatestTrailerForRent = () =>
+    api.get(AppConstants.LATEST_TRAILER_FOR_RENT);
+  const getLatestTrailerInTheatres = () =>
+    api.get(AppConstants.LATEST_TRAILER_IN_THEATRES);
   const getPopularStreaming = () => api.get(endPoint);
   const getPopularTV = () => api.get(AppConstants.POPULAR_TV_ENDPOINT);
   const getPopularInTheatres = () =>
@@ -25,8 +32,14 @@ const create = (
     api.get(
       `${AppConstants.MOVIE}${movieId}${AppConstants.MOVIE_TRAILING_ENDPOINT}`
     );
+  const getTV = (tvId: number) =>
+    api.get(`${AppConstants.TV}${tvId}${AppConstants.MOVIE_TRAILING_ENDPOINT}`);
 
   return {
+    getLatestTrailerStreaming,
+    getLatestTrailerTV,
+    getLatestTrailerForRent,
+    getLatestTrailerInTheatres,
     getPopularStreaming,
     getPopularTV,
     getPopularInTheatres,
@@ -36,6 +49,7 @@ const create = (
     getFreeMovies,
     getFreeTV,
     getMovie,
+    getTV,
   };
 };
 

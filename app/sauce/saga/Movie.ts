@@ -87,7 +87,53 @@ function* getSingleMovie(api: any, action: any) {
   );
 }
 
+function* getLatestMovie(api: any) {
+  yield call(
+    callApi,
+    api.getLatestTrailerStreaming,
+    MovieActions.latestTrailerStreaming,
+    MovieActions.movieFailure
+  );
+}
+function* getLatestTVShow(api: any) {
+  yield call(
+    callApi,
+    api.getLatestTrailerTV,
+    MovieActions.latestTrailerTV,
+    MovieActions.movieFailure
+  );
+}
+function* getLatestForRent(api: any) {
+  yield call(
+    callApi,
+    api.getLatestTrailerForRent,
+    MovieActions.latestTrailerRent,
+    MovieActions.movieFailure
+  );
+}
+function* getLatestInTheatres(api: any) {
+  yield call(
+    callApi,
+    api.getLatestTrailerInTheatres,
+    MovieActions.latestTrailerTheatres,
+    MovieActions.movieFailure
+  );
+}
+function* getSingleTV(api: any, action: any) {
+  yield call(
+    callApiMovieDetail,
+    api.getTV,
+    action.id,
+    MovieActions.movieDetail,
+    MovieActions.movieDetailScreenFailure
+  );
+}
+
 export default [
+  takeLatest(MovieTypes.MOVIE_REQUEST, getLatestMovie, movieAPI),
+  takeLatest(MovieTypes.MOVIE_REQUEST, getLatestTVShow, movieAPI),
+  takeLatest(MovieTypes.MOVIE_REQUEST, getLatestForRent, movieAPI),
+  takeLatest(MovieTypes.MOVIE_REQUEST, getLatestInTheatres, movieAPI),
   takeLatest(MovieTypes.MOVIE_REQUEST, getPopularMovies, movieAPI),
   takeLatest(MovieTypes.MOVIE_REQUEST, getPopularTV, movieAPI),
   takeLatest(MovieTypes.MOVIE_REQUEST, getTheatreMovies, movieAPI),
@@ -97,4 +143,5 @@ export default [
   takeLatest(MovieTypes.MOVIE_REQUEST, getFreeMovies, movieAPI),
   takeLatest(MovieTypes.MOVIE_REQUEST, getFreeTV, movieAPI),
   takeLatest(MovieTypes.MOVIE_SINGLE_REQUEST, getSingleMovie, movieAPI),
+  takeLatest(MovieTypes.TV_SINGLE_REQUEST, getSingleTV, movieAPI),
 ];
