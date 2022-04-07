@@ -1,6 +1,6 @@
 const navigations = {
-  home: "Home",
-  movieDetail: "MovieDetail",
+  HOME: "Home",
+  MOVIE_DETAIL: "MovieDetail",
 };
 
 export default navigations;

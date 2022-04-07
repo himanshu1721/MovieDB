@@ -62,7 +62,7 @@ const TrailerCard = ({ item }: TrailerCardProps): JSX.Element => {
       >
         <MenuCircle />
         <TouchableOpacity activeOpacity={0.8}>
-          <Image style={styles.playButtonStyles} source={images.play} />
+          <Image style={styles.playButtonStyles} source={images.playTrailer} />
         </TouchableOpacity>
       </ImageBackground>
       <View style={styles.imageAndTitleSeparator} />

@@ -30,9 +30,14 @@ const ReleaseDateAndRuntime = ({
           <Text style={styles.ratedTextStyles}>{Strings.nr}</Text>
         </View>
         <Text style={styles.dateStyles}>
-          {getReleaseDate} ({Strings.us}) •{Strings.space}
-          {getRuntime}
+          {getReleaseDate} ({Strings.us})
         </Text>
+        {runTime && (
+          <Text style={styles.dateStyles}>
+            {Strings.dotChar}
+            {getRuntime}
+          </Text>
+        )}
       </View>
     </View>
   );

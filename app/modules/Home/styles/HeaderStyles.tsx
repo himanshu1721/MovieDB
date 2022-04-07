@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     backgroundColor: Colors.prussianBlue,
-    height: moderateScale(60),
+    height: moderateScale(72),
     justifyContent: "center",
   },
 });

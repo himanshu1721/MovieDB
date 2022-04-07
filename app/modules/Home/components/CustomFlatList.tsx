@@ -35,7 +35,7 @@ const CustomFlatList = ({ data, navigation }: CustomFlatListProps) => {
                     tvID: item?.id,
                   };
 
-              navigation?.navigate(Navigations.movieDetail, params);
+              navigation?.navigate(Navigations.MOVIE_DETAIL, params);
             }}
             item={item}
           />

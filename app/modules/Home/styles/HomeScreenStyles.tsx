@@ -4,7 +4,8 @@ import { Colors, verticalScale, moderateScale } from "../../../themes";
 const styles = StyleSheet.create({
   trailerAndPopularSeparator: { height: verticalScale(30) },
   movieListContainer: { flex: 1, padding: moderateScale(15) },
-  sectionAndTrailerListSeparator: { height: verticalScale(10) },
+  sectionAndTrailerListSeparator: { height: moderateScale(20) },
+  sectionAndMovieListSeparator: { height: moderateScale(10) },
   sectionTitleBar: {
     zIndex: 1,
     flexDirection: "row",

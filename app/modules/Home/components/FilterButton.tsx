@@ -9,12 +9,14 @@ interface Value {
 }
 
 interface FilterButtonProps {
+  isTrailer?: boolean;
   elements: any;
   value: string;
   onSelect: (arg0: string) => void;
 }
 
 const FilterButton = ({
+  isTrailer,
   elements,
   value,
   onSelect = () => {},
@@ -28,20 +30,34 @@ const FilterButton = ({
 
   return (
     <View style={styles.container}>
-      <View style={styles.subContainer}>
-        <Text style={styles.titleStyle}>{value}</Text>
+      <View
+        style={isTrailer ? styles.subContainerTrailer : styles.subContainer}
+      >
+        <Text style={isTrailer ? styles.titleStyleTrailer : styles.titleStyle}>
+          {value}
+        </Text>
         <View style={styles.containerBetweenTextAndIcon} />
         <TouchableOpacity onPress={() => setOpen(!open)}>
-          <Image style={styles.arrowStyles} source={Images.expandArrow} />
+          <Image
+            style={styles.arrowStyles}
+            source={isTrailer ? Images.expandArrowBlue : Images.expandArrow}
+          />
         </TouchableOpacity>
       </View>
-      {open && <View style={styles.containerBehind} />}
       {open && (
-        <View style={styles.dropdown}>
+        <View
+          style={
+            isTrailer ? styles.containerBehindTrailer : styles.containerBehind
+          }
+        />
+      )}
+      {open && (
+        <View style={isTrailer ? styles.dropdownTrailer : styles.dropdown}>
           {elements.map((val: Value, i: number) => {
             if (value !== val.name) {
               return (
                 <TouchableOpacity
+                  style={styles.optionStyles}
                   onPress={() => {
                     onSelectedItem(val.name);
                   }}
