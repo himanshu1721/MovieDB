@@ -5,6 +5,11 @@ import API from "../../sauce/services/Api";
 
 const movieAPI = API.create();
 
+interface ActionType {
+  id: number;
+  type: string;
+}
+
 function* getPopularMovies(api: any) {
   yield call(
     callApi,
@@ -77,7 +82,7 @@ function* getFreeTV(api: any) {
   );
 }
 
-function* getSingleMovie(api: any, action: any) {
+function* getSingleMovie(api: any, action: ActionType) {
   yield call(
     callApiMovieDetail,
     api.getMovie,
@@ -119,7 +124,7 @@ function* getLatestInTheatres(api: any) {
     MovieActions.movieFailure
   );
 }
-function* getSingleTV(api: any, action: any) {
+function* getSingleTV(api: any, action: ActionType) {
   yield call(
     callApiMovieDetail,
     api.getTV,

@@ -140,6 +140,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps): JSX.Element => {
       )}
       {!isLoading && !isError && (
         <ScrollView
+          bounces={false}
           showsVerticalScrollIndicator={false}
           style={styles.scrollViewStyle}
         >
@@ -148,6 +149,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps): JSX.Element => {
             <View style={styles.sectionTitleBar}>
               <SectionTitle isTrailer title={Strings.latestTrailers} />
               <FilterButton
+                isTrailer
                 elements={FilterButtonOptions.latestTrailerFilters}
                 onSelect={onSelectLatest}
                 value={selectedElementLatest}
@@ -160,6 +162,21 @@ const HomeScreen = ({ navigation }: HomeScreenProps): JSX.Element => {
 
           <View style={styles.movieListContainer}>
             <View style={styles.sectionTitleBar}>
+              <SectionTitle title={Strings.trending} />
+              <FilterButton
+                onSelect={onSelectTrending}
+                value={selectedElementTrending}
+                elements={FilterButtonOptions.trendingFilter}
+              />
+            </View>
+            <View style={styles.sectionAndMovieListSeparator} />
+            <View style={styles.sectionStyle}>
+              <CustomFlatList navigation={navigation} data={trending} />
+            </View>
+          </View>
+
+          <View style={styles.movieListContainer}>
+            <View style={styles.sectionTitleBar}>
               <SectionTitle title={Strings.whatsPopular} />
               <FilterButton
                 elements={FilterButtonOptions.popularMoviesFilter}
@@ -167,7 +184,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps): JSX.Element => {
                 value={selectedElementPopular}
               />
             </View>
-            <View style={styles.sectionAndTrailerListSeparator} />
+            <View style={styles.sectionAndMovieListSeparator} />
             <View style={styles.sectionStyle}>
               <CustomFlatList navigation={navigation} data={popular} />
             </View>
@@ -182,24 +199,9 @@ const HomeScreen = ({ navigation }: HomeScreenProps): JSX.Element => {
                 value={selectedElementFreeToWatch}
               />
             </View>
-            <View style={styles.sectionAndTrailerListSeparator} />
+            <View style={styles.sectionAndMovieListSeparator} />
             <View style={styles.sectionStyle}>
               <CustomFlatList navigation={navigation} data={free} />
-            </View>
-          </View>
-
-          <View style={styles.movieListContainer}>
-            <View style={styles.sectionTitleBar}>
-              <SectionTitle title={Strings.trending} />
-              <FilterButton
-                onSelect={onSelectTrending}
-                value={selectedElementTrending}
-                elements={FilterButtonOptions.trendingFilter}
-              />
-            </View>
-            <View style={styles.sectionAndTrailerListSeparator} />
-            <View style={styles.sectionStyle}>
-              <CustomFlatList navigation={navigation} data={trending} />
             </View>
           </View>
         </ScrollView>

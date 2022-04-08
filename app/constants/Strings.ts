@@ -21,6 +21,7 @@ const strings = {
   overview: "Overview",
   commaWithLeadingSpace: ", ",
   space: " ",
+  dotChar: " • ",
   errorMessageDetailScreen: "Could not fetch data, please try again",
 };
 
