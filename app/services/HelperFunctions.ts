@@ -5,7 +5,9 @@ interface GenreProp {
 }
 
 //returns the genre list from genre object.
-export const getGenreList = (array: any[]): string => {
+export const getGenreList = (
+  array: any[] = [{ id: 1, name: Strings.streaming }]
+): string => {
   return array
     .map((x: GenreProp) => x.name)
     .join(Strings.commaWithLeadingSpace);

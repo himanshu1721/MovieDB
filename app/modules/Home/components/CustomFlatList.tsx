@@ -13,6 +13,8 @@ interface CustomFlatListProps {
 const CustomFlatList = ({ data, navigation }: CustomFlatListProps) => {
   return (
     <FlatList
+      initialNumToRender={7}
+      maxToRenderPerBatch={6}
       keyExtractor={(item) => `${item.id}`}
       bounces={false}
       horizontal

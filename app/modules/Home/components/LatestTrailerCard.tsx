@@ -53,18 +53,23 @@ interface TrailerCardProps {
 const TrailerCard = ({ item }: TrailerCardProps): JSX.Element => {
   return (
     <View style={styles.container}>
-      <ImageBackground
-        imageStyle={styles.imageBorderStyle}
-        source={{
-          uri: `${AppConstants.API_IMAGE}${item?.backdrop_path}`,
-        }}
-        style={styles.imageStyles}
-      >
-        <MenuCircle />
-        <TouchableOpacity activeOpacity={0.8}>
-          <Image style={styles.playButtonStyles} source={images.playTrailer} />
-        </TouchableOpacity>
-      </ImageBackground>
+      <View style={styles.imageContainer}>
+        <ImageBackground
+          imageStyle={styles.imageBorderStyle}
+          source={{
+            uri: `${AppConstants.API_IMAGE}${item?.backdrop_path}`,
+          }}
+          style={styles.imageStyles}
+        >
+          <MenuCircle />
+          <TouchableOpacity activeOpacity={0.8}>
+            <Image
+              style={styles.playButtonStyles}
+              source={images.playTrailer}
+            />
+          </TouchableOpacity>
+        </ImageBackground>
+      </View>
       <View style={styles.imageAndTitleSeparator} />
       <View>
         <Text style={styles.titleStyles}>

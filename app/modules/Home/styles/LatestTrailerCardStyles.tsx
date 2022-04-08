@@ -2,6 +2,12 @@ import { StyleSheet } from "react-native";
 import { Colors, moderateScale, verticalScale } from "../../../themes";
 
 const styles = StyleSheet.create({
+  imageContainer: {
+    width: moderateScale(300),
+    height: moderateScale(180),
+    borderRadius: moderateScale(9),
+    backgroundColor: Colors.gray,
+  },
   titleStyles: {
     letterSpacing: moderateScale(0.8),
     color: Colors.white,

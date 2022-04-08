@@ -2,6 +2,12 @@ import { StyleSheet } from "react-native";
 import { moderateScale, Colors } from "../../../themes";
 
 const styles = StyleSheet.create({
+  imageContainer: {
+    backgroundColor: Colors.gray,
+    width: moderateScale(144),
+    borderRadius: moderateScale(6),
+    height: moderateScale(216),
+  },
   container: {
     marginTop: moderateScale(10),
     width: moderateScale(140),
