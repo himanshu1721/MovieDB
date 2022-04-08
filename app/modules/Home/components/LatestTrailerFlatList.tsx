@@ -6,6 +6,7 @@ import styles from "../styles/LatestTrailerFlatListStyles";
 const CustomTrailerFlatList = ({ data }: any): JSX.Element => {
   return (
     <FlatList
+      maxToRenderPerBatch={6}
       bounces={false}
       showsHorizontalScrollIndicator={false}
       initialNumToRender={8}

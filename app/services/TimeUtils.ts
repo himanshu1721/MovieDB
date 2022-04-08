@@ -1,58 +1,60 @@
+import { Strings } from "../constants";
+
 const returnMonth = (month: string): string => {
   switch (month) {
-    case "01":
-      return "Jan";
-    case "02":
-      return "Feb";
-    case "03":
-      return "March";
-    case "04":
-      return "April";
-    case "05":
-      return "May";
-    case "06":
-      return "Jun";
-    case "07":
-      return "July";
-    case "08":
-      return "Aug";
-    case "09":
-      return "Sep";
-    case "10":
-      return "Oct";
-    case "11":
-      return "Nov";
-    case "12":
-      return "Dec";
+    case Strings.one:
+      return Strings.january;
+    case Strings.two:
+      return Strings.february;
+    case Strings.three:
+      return Strings.march;
+    case Strings.four:
+      return Strings.april;
+    case Strings.five:
+      return Strings.may;
+    case Strings.six:
+      return Strings.june;
+    case Strings.seven:
+      return Strings.july;
+    case Strings.eight:
+      return Strings.august;
+    case Strings.nine:
+      return Strings.september;
+    case Strings.ten:
+      return Strings.october;
+    case Strings.eleven:
+      return Strings.november;
+    case Strings.twelve:
+      return Strings.december;
     default:
-      return "nil";
+      return Strings.nil;
   }
 };
 
 //return refactored date including name of month.
-export const refactorDate = (date: string): string => {
+export const refactorDate = (date: string = Strings.space): string => {
   const month = returnMonth(date.substring(5, 7));
   const newDate = `${month} ${date.substring(8, 10)}, ${date.substring(0, 4)}`;
   return newDate;
 };
 
 //Get only the year from YYYY/MM/DD formatted string
-export const getYear = (date: string): string => {
+export const getYear = (date: string = Strings.space): string => {
   return date.substring(0, 4);
 };
 
 //Refactor date from YYYY/MM/DD formatted string
-export const returnDateMMDDYYYY = (date: string): string => {
+export const returnDateMMDDYYYY = (date: string = Strings.space): string => {
   return `${date.substring(5, 7)}/${date.substring(8, 10)}/${date.substring(
     0,
     4
   )}`;
 };
 
-export const convertMinsToHrsMins = (mins: number): string => {
+export const convertMinsToHrsMins = (mins: number = 0): string => {
   const h = Math.floor(mins / 60);
   const m = Math.round(mins % 60);
   const a = h < 10 ? +h : h;
-  const b = m < 10 ? "0" + m : m;
-  return `${a}h ${b}m`;
+  const b = m < 10 ? Strings.zero + m : m;
+  return `${a}${Strings.h} ${b}${Strings.m}`;
 };

@@ -52,7 +52,7 @@ export default Creators;
 
 /* ------------- Initial State ------------- */
 export const INITIAL_STATE: ImmutableObject<MovieProps> = Immutable({
-  latestTrailerMovieList: null,
+  latestTrailerMovieList: [],
   latestTrailerTVList: null,
   latestTrailerForRent: null,
   latestTrailerInTheatres: null,

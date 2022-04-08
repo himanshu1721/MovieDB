@@ -14,9 +14,10 @@ const AppConstants = {
   TV: "tv/",
   MOVIE_TRAILING_ENDPOINT: `?api_key=${API_KEY}&language=en-US`,
   LATEST_TRAILER_STREAMING: `movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`,
-  LATEST_TRAILER_TV: `tv/airing_today?api_key=${API_KEY}&language=en-US&page=1`,
+  LATEST_TRAILER_TV: `tv/airing_today?api_key=${API_KEY}&language=en-US&page=5`,
   LATEST_TRAILER_FOR_RENT: `discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=rent`,
   LATEST_TRAILER_IN_THEATRES: `movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`,
+  LATEST_TRAILER_BACKGROUND_IMAGE: "/x747ZvF0CcYYTTpPRCoUrxA2cYy.jpg",
 };
 
 export default AppConstants;

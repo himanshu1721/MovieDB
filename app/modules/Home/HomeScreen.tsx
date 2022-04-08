@@ -16,7 +16,7 @@ import CustomFlatList from "./components/CustomFlatList";
 import LatestTrailerBackgroundImage from "./components/LatestTrailerBGImage";
 import LatestTrailerFlatList from "./components/LatestTrailerFlatList";
 import FilterButtonOptions from "../../constants/FilterButtonOptions";
-import { Strings } from "../../constants";
+import { AppConstants, Strings } from "../../constants";
 import styles from "./styles/HomeScreenStyles";
 
 interface HomeScreenProps {
@@ -125,6 +125,13 @@ const HomeScreen = ({ navigation }: HomeScreenProps): JSX.Element => {
     dispatch(MovieActions.movieRequest());
   }, [dispatch]);
 
+  useEffect(() => {
+    setLatest(latestTrailerMovie);
+    setTrending(trendingMoviesDay);
+    setPopular(popularMovies);
+    setFree(freeMovies);
+  }, [popularMovies, trendingMoviesDay, freeMovies, latestTrailerMovie]);
+
   return (
     <SafeAreaView style={styles.container}>
       <HeaderComponent />
@@ -144,37 +151,6 @@ const HomeScreen = ({ navigation }: HomeScreenProps): JSX.Element => {
           showsVerticalScrollIndicator={false}
           style={styles.scrollViewStyle}
         >
-          <View style={styles.movieListContainer}>
-            <LatestTrailerBackgroundImage imagePath={latest[0].backdrop_path} />
-            <View style={styles.sectionTitleBar}>
-              <SectionTitle isTrailer title={Strings.latestTrailers} />
-              <FilterButton
-                isTrailer
-                elements={FilterButtonOptions.latestTrailerFilters}
-                onSelect={onSelectLatest}
-                value={selectedElementLatest}
-              />
-            </View>
-            <View style={styles.sectionAndTrailerListSeparator} />
-            <LatestTrailerFlatList data={latest} />
-          </View>
-          <View style={styles.trailerAndPopularSeparator} />
-
-          <View style={styles.movieListContainer}>
-            <View style={styles.sectionTitleBar}>
-              <SectionTitle title={Strings.trending} />
-              <FilterButton
-                onSelect={onSelectTrending}
-                value={selectedElementTrending}
-                elements={FilterButtonOptions.trendingFilter}
-              />
-            </View>
-            <View style={styles.sectionAndMovieListSeparator} />
-            <View style={styles.sectionStyle}>
-              <CustomFlatList navigation={navigation} data={trending} />
-            </View>
-          </View>
-
           <View style={styles.movieListContainer}>
             <View style={styles.sectionTitleBar}>
               <SectionTitle title={Strings.whatsPopular} />
@@ -202,6 +178,42 @@ const HomeScreen = ({ navigation }: HomeScreenProps): JSX.Element => {
             <View style={styles.sectionAndMovieListSeparator} />
             <View style={styles.sectionStyle}>
               <CustomFlatList navigation={navigation} data={free} />
+            </View>
+          </View>
+
+          <View style={styles.movieListContainer}>
+            <LatestTrailerBackgroundImage
+              imagePath={
+                latest?.[0]?.backdrop_path ??
+                AppConstants.LATEST_TRAILER_BACKGROUND_IMAGE
+              }
+            />
+            <View style={styles.sectionTitleBar}>
+              <SectionTitle isTrailer title={Strings.latestTrailers} />
+              <FilterButton
+                isTrailer
+                elements={FilterButtonOptions.latestTrailerFilters}
+                onSelect={onSelectLatest}
+                value={selectedElementLatest}
+              />
+            </View>
+            <View style={styles.sectionAndTrailerListSeparator} />
+            <LatestTrailerFlatList data={latest} />
+          </View>
+          <View style={styles.trailerAndPopularSeparator} />
+
+          <View style={styles.movieListContainer}>
+            <View style={styles.sectionTitleBar}>
+              <SectionTitle title={Strings.trending} />
+              <FilterButton
+                onSelect={onSelectTrending}
+                value={selectedElementTrending}
+                elements={FilterButtonOptions.trendingFilter}
+              />
+            </View>
+            <View style={styles.sectionAndMovieListSeparator} />
+            <View style={styles.sectionStyle}>
+              <CustomFlatList navigation={navigation} data={trending} />
             </View>
           </View>
         </ScrollView>

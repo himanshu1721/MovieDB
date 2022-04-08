@@ -18,12 +18,14 @@ const MovieCard = ({ item, onTap }: MovieCardProps): JSX.Element => {
       activeOpacity={0.9}
       style={styles.container}
     >
-      <Image
-        style={styles.imageStyles}
-        source={{
-          uri: AppConstants.API_IMAGE + item?.poster_path,
-        }}
-      />
+      <View style={styles.imageContainer}>
+        <Image
+          style={styles.imageStyles}
+          source={{
+            uri: AppConstants.API_IMAGE + item?.poster_path,
+          }}
+        />
+      </View>
       <MenuCircle />
       <RatingCircle vote_average={item?.vote_average} />
       <View style={styles.separatorStyles} />
