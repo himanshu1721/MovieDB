@@ -9,6 +9,9 @@ https://github.com/himanshu1721/MovieDB/tree/develop
 [![react-native](https://img.shields.io/badge/react--native-67.0.3-brightgreen)](https://facebook.github.io/react-native/docs/0.67/getting-started)
 
 ---
+## Release APK
+https://github.com/himanshu1721/MovieDB/blob/develop/android/app/release/MovieDB.apk
+
 ## Project Description
 MovieDB is a mobile application for Android and ios devices, to show the latest and trending Movies and TV shows. It also provides the list of movies and TV shows which are around the theatres or are free to watch. Overview and movie ratings can also be accessed by tapping on the content. Latest Trailers can also be viewed on our App. The content is updated everyday.
 
