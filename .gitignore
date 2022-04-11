@@ -2,6 +2,8 @@
 #
 .DS_Store
 
+android/app/release/
+
 # Xcode
 #
 build/
@@ -23,6 +25,7 @@ DerivedData
 
 # Android/IntelliJ
 #
+app/release
 build/
 .idea
 .gradle
